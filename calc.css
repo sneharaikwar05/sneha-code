@@ -1,0 +1,392 @@
+        /* =========================
+        Global Styling
+        ========================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            padding: 20px;
+
+            font-family: "Segoe UI", Arial, sans-serif;
+
+            background:
+                radial-gradient(
+                    circle at top left,
+                    #243b55,
+                    transparent 45%
+                ),
+                linear-gradient(
+                    135deg,
+                    #0f172a,
+                    #111827,
+                    #1e293b
+                );
+        }
+
+        /* =========================
+           Calculator Container
+        ========================= */
+
+        #calculator {
+            width: 100%;
+            max-width: 360px;
+
+            padding: 22px;
+
+            background: rgba(15, 23, 42, 0.96);
+
+            border: 1px solid rgba(255, 255, 255, 0.08);
+
+            border-radius: 26px;
+
+            box-shadow:
+                0 25px 60px rgba(0, 0, 0, 0.45),
+                0 0 25px rgba(59, 130, 246, 0.08);
+        }
+
+        /* =========================
+        Calculator Header
+        ========================= */
+
+        .calculator-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            margin-bottom: 22px;
+        }
+
+        .calculator-title {
+            color: #f8fafc;
+
+            font-size: 20px;
+            font-weight: 700;
+
+            letter-spacing: 0.5px;
+        }
+
+        .calculator-subtitle {
+            color: #94a3b8;
+
+            font-size: 12px;
+
+            margin-top: 4px;
+        }
+
+        .calculator-icon {
+            width: 42px;
+            height: 42px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            border-radius: 12px;
+
+            background: #1e3a8a;
+
+            color: #bfdbfe;
+
+            font-size: 22px;
+        }
+
+        /* =========================
+           Output Display
+        ========================= */
+
+        #outputPart {
+            width: 100%;
+            min-height: 145px;
+
+            padding: 22px;
+
+            display: flex;
+            flex-direction: column;
+
+            justify-content: flex-end;
+            align-items: flex-end;
+
+            background: linear-gradient(
+                145deg,
+                #f8fafc,
+                #e2e8f0
+            );
+
+            border-radius: 18px;
+
+            margin-bottom: 20px;
+
+            overflow: hidden;
+        }
+
+        .previous-operand {
+            width: 100%;
+
+            color: #64748b;
+
+            font-size: 16px;
+
+            text-align: right;
+
+            margin-bottom: 12px;
+
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .current-operand {
+            width: 100%;
+
+            color: #0f172a;
+
+            font-size: 38px;
+            font-weight: 700;
+
+            text-align: right;
+
+            overflow: hidden;
+            white-space: nowrap;
+
+            text-overflow: ellipsis;
+        }
+
+        /* =========================
+           Buttons Grid
+        ========================= */
+
+        #inputPart {
+            display: grid;
+
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+
+            gap: 10px;
+        }
+
+        /* =========================
+           Common Button Styling
+        ========================= */
+
+        .btn {
+            width: 100%;
+            height: 58px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            border: none;
+            border-radius: 14px;
+
+            font-family: inherit;
+
+            font-size: 20px;
+            font-weight: 600;
+
+            cursor: pointer;
+
+            transition:
+                background 0.2s ease,
+                transform 0.15s ease,
+                box-shadow 0.2s ease;
+        }
+
+        .btn:active {
+            transform: scale(0.94);
+        }
+
+        /* =========================
+           Number Buttons
+        ========================= */
+
+        .number {
+            background: #263449;
+
+            color: #f8fafc;
+
+            border: 1px solid rgba(
+                255, 255, 255, 0.04
+            );
+        }
+
+        .number:hover {
+            background: #3b4d65;
+
+            box-shadow:
+                0 5px 12px rgba(0, 0, 0, 0.2);
+
+            transform: translateY(-2px);
+        }
+
+        /* =========================
+           Utility Buttons
+        ========================= */
+
+        .utility {
+            background: #e2e8f0;
+
+            color: #334155;
+        }
+
+        .utility:hover {
+            background: #cbd5e1;
+
+            transform: translateY(-2px);
+        }
+
+        /* =========================
+           Operator Buttons
+        ========================= */
+
+        .operator {
+            background: #1d4ed8;
+
+            color: #ffffff;
+        }
+
+        .operator:hover {
+            background: #2563eb;
+
+            box-shadow:
+                0 5px 15px rgba(37, 99, 235, 0.3);
+
+            transform: translateY(-2px);
+        }
+
+        /* =========================
+           AC Button
+        ========================= */
+
+        .clear {
+            background: #dc2626;
+
+            color: #ffffff;
+        }
+
+        .clear:hover {
+            background: #b91c1c;
+        }
+
+        /* =========================
+           Delete Button
+        ========================= */
+
+        .delete {
+            background: #475569;
+
+            color: #ffffff;
+        }
+
+        .delete:hover {
+            background: #64748b;
+        }
+
+        /* =========================
+           Equal Button
+        ========================= */
+
+        .equal {
+            background: linear-gradient(
+                135deg,
+                #f97316,
+                #ea580c
+            );
+
+            color: #ffffff;
+        }
+
+        .equal:hover {
+            background: #c2410c;
+
+            box-shadow:
+                0 5px 15px rgba(249, 115, 22, 0.25);
+
+            transform: translateY(-2px);
+        }
+
+        /* =========================
+           Footer
+        ========================= */
+
+        .calculator-footer {
+            text-align: center;
+
+            margin-top: 20px;
+
+            color: #64748b;
+
+            font-size: 11px;
+
+            letter-spacing: 1px;
+        }
+
+        /* =========================
+           Responsive Design
+        ========================= */
+
+        @media (max-width: 480px) {
+
+            body {
+                padding: 15px;
+            }
+
+            #calculator {
+                max-width: 340px;
+
+                padding: 18px;
+
+                border-radius: 22px;
+            }
+
+            #outputPart {
+                min-height: 130px;
+
+                padding: 18px;
+            }
+
+            .current-operand {
+                font-size: 34px;
+            }
+
+            .btn {
+                height: 54px;
+
+                font-size: 19px;
+
+                border-radius: 12px;
+            }
+
+            #inputPart {
+                gap: 9px;
+            }
+        }
+
+        @media (max-width: 350px) {
+
+            #calculator {
+                padding: 14px;
+            }
+
+            .btn {
+                height: 48px;
+
+                font-size: 17px;
+            }
+
+            #inputPart {
+                gap: 7px;
+            }
+
+            .current-operand {
+                font-size: 28px;
+            }
+        }

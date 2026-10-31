@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+
+    background: linear-gradient(
+        135deg,
+        #0f172a,
+        #1e293b,
+        #334155
+    );
+
+    font-family: "Segoe UI", Arial, sans-serif;
+}
+
+/* Calculator Main Container */
+#calculator {
+    width: 100%;
+    max-width: 340px;
+    padding: 18px;
+
+    background: rgba(15, 23, 42, 0.95);
+
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 24px;
+
+    box-shadow:
+        0 25px 50px rgba(0, 0, 0, 0.4),
+        0 0 20px rgba(59, 130, 246, 0.08);
+
+    overflow: hidden;
+}
+
+/* Calculator Display */
+.outputPart {
+    width: 100%;
+    height: 140px;
+
+    background: linear-gradient(
+        145deg,
+        #f8fafc,
+        #e2e8f0
+    );
+    font-size: 2.5rem;
+
+    border-radius: 16px;
+    margin-bottom: 18px;
+    padding: 20px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-end;
+
+    overflow: hidden;
+    word-break: break-all;
+
+    color: #0f172a;
+}
+
+/* Input Button Area */
+#inputPart {
+    width: 100%;
+
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 10px;
+}
+
+/* Button Rows */
+.row1,
+.row2,
+.row3,
+.row4 {
+    display: contents;
+}
+
+/* Number Buttons */
+.box1,
+.box2,
+.box3 {
+    min-width: 0;
+    height: 58px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    color: #f8fafc;
+    background: #334155;
+
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    border-radius: 14px;
+
+    font-size: 20px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        transform 0.15s ease,
+        box-shadow 0.2s ease;
+}
+
+/* Hover Effect */
+.box1:hover,
+.box2:hover,
+.box3:hover {
+    background: #475569;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 5px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Click Effect */
+.box1:active,
+.box2:active,
+.box3:active,
+.box4:active {
+    transform: scale(0.94);
+}
+
+/* Operator Buttons */
+.box4 {
+    min-width: 0;
+    height: 58px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    color: #ffffff;
+    background: #3b82f6;
+
+    border: none;
+    border-radius: 14px;
+
+    font-size: 21px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        transform 0.15s ease,
+        box-shadow 0.2s ease;
+}
+
+/* Operator Hover */
+.box4:hover {
+    background: #2563eb;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 5px 15px rgba(59, 130, 246, 0.3);
+}
+
+/* AC Button */
+.row4 .box1 {
+    background: #334155;
+    color: white;
+}
+
+.row4 .box1:hover {
+    background: #dc2626;
+}
+
+/* Decimal Button */
+.row4 .box3 {
+    background: #334155;
+}
+
+/* Equal Button */
+.row4 .box4 {
+    background: linear-gradient(
+        135deg,
+        #f97316,
+        #ea580c
+    );
+
+    color: white;
+}
+
+.row4 .box4:hover {
+    background: #6c5146;
+}
+
+/* White Operator Buttons */
+.box4[style*="background-color: white"] {
+    background: #e2e8f0 !important;
+    color: #0f172a !important;
+}
+
+.box4[style*="background-color: white"]:hover {
+    background: #cbd5e1 !important;
+}
+
+/* Display Text */
+.outputPart .previous-operand {
+    color: #64748b;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.outputPart .current-operand {
+    color: #0f172a;
+    font-size: 36px;
+    font-weight: 700;
+}
+
+/* Tablet */
+@media (max-width: 600px) {
+    #calculator {
+        max-width: 320px;
+        padding: 16px;
+    }
+
+    .outputPart {
+        height: 130px;
+    }
+
+    .box1,
+    .box2,
+    .box3,
+    .box4 {
+        height: 55px;
+        font-size: 19px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 360px) {
+    body {
+        padding: 12px;
+    }
+
+    #calculator {
+        max-width: 100%;
+        padding: 12px;
+        border-radius: 20px;
+    }
+
+    #inputPart {
+        gap: 8px;
+    }
+
+    .box1,
+    .box2,
+    .box3,
+    .box4 {
+        height: 50px;
+        font-size: 17px;
+        border-radius: 11px;
+    }
+
+    .outputPart {
+        height: 115px;
+        padding: 15px;
+    }
+
+    .outputPart .current-operand {
+        font-size: 30px;
+    }
+}
+
+.row1,
+.row2,
+.row3,
+.row4,
+.row5 {
+    display: contents;
+}
+
+/* Clear Button */
+.clear {
+    background-color: #ef4444;
+    color: white;
+}
+
+/* Delete Button */
+.delete {
+    background-color: #64748b;
+    color: white;
+}
+
+/* Percentage Button */
+.percent {
+    background-color: #8b5cf6;
+    color: white;
+}
+
+/* Decimal Button */
+.decimal {
+    background-color: #334155;
+    color: white;
+}
+
+/* Equal Button */
+.equal {
+    background: linear-gradient(
+        135deg,
+        #f97316,
+        #ea580c
+    );
+    color: white;
+}
+</style>
+<body>
+    <div id="calculator">
+        <div class="outputPart" id="display">0</div>
+        <div id="inputPart">
+            <div class="row1">
+                <button class="box1 clear" onclick="clearDisplay()">C</button>
+                <button class="box2 delete" onclick="deleteLast()">X</button>
+                <button class="box3 percent" onclick="appendOperator('%')">%</button>
+                <button class="box4 operator" onclick="appendOperator('/')" style="background-color: white; color: black;">/</button>
+            </div>
+            <div class="row2">
+                <button class="box1" onclick="appendNumber('7')">7</button>
+                <button class="box2" onclick="appendNumber('8')">8</button>
+                <button class="box3" onclick="appendNumber('9')">9</button>
+                <button class="box4" onclick="appendOperator('*')" style="background-color: white; color: black;">*</button>
+            </div>
+            <div class="row3">
+                <button class="box1" onclick="appendNumber('4')">4</button>
+                <button class="box2" onclick="appendNumber('5')">5</button>
+                <button class="box3" onclick="appendNumber('6')">6</button>
+                <button class="box4" onclick="appendOperator('+')" style="background-color: white; color: black;">+</button>
+            </div>
+            <div class="row4">
+                <button class="box1" onclick="appendNumber('1')">1</button>
+                <button class="box2" onclick="appendNumber('2')">2</button>
+                <button class="box3" onclick="appendNumber('3')">3</button>
+                <button class="box4" onclick="appendOperator('-')" style="background-color: rgb(236, 125, 46); color: white;">-</button>
+            </div>
+            <div class="row5">
+                <button class="box1" onclick="appendNumber('0')">0</button>
+                <button class="box2 decimal" onclick="appendDecimal('.')">.</button>
+                <button class="box3 equal" onclick="calculate()">=</button>
+                <!-- <button class="box4 equal">=</button> -->
+    </div>
+        </div>
+    </div>
+
+    <script>
+        let display = document.getElementById('display')
+        let currentInput = '';
+        let resultShown = false;
+
+        function appendNumber(number){
+            if(resultShown){
+                currentInput = "";
+                resultShown = false;
+            }
+            currentInput += number;
+            updateDisplay();
+        }
+        function appendOperator(operator) {
+            if (currentInput === '') return;
+            if (/[+\-*/%]$/.test(currentInput)) {
+                currentInput = currentInput.slice(0, -1);
+            }
+            currentInput += operator;
+            resultShown = false;
+            updateDisplay();
+        }
+        function appendDecimal(){
+            const parts = currentInput.split(/[\+\-\*/%]/);
+            const last = parts[parts.length-1]
+            if(!last.includes('.')){
+                currentInput += '.';
+                updateDisplay()
+            }
+            
+        }
+
+        function clearDisplay() {
+            currentInput = '';
+            updateDisplay('0');
+    }
+
+        function deleteLast() {
+        currentInput = currentInput.slice(0, -1);
+        updateDisplay(currentInput || '0');
+    }
+
+        function calculate() {
+        try {
+        let result = eval(currentInput);
+        updateDisplay(result);
+        currentInput = result.toString();
+        resultShown = true;
+        }
+        catch {
+        updateDisplay('Error');
+        currentInput = '';
+    }
+    }
+        function updateDisplay(content = currentInput){
+            display.textContent = content;
+        }
+
+
+    </script>
+</body>
+</html>
